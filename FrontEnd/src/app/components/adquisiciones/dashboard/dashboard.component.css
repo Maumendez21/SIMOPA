@@ -1,0 +1,8 @@
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-toggle {
+    background-color: transparent;
+    border-color: transparent;
+}

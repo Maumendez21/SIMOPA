@@ -1,0 +1,155 @@
+<!-- <div id="sidebar-wrapper">
+    <div class="sidebar-heading text-center">
+        <img *ngIf="municipio == 'SAN ANDRES CHOLULA'" class="logo-municipio" src="assets/global/images/LogoTepeaca.png" alt="Logo Tepeaca">
+        <img *ngIf="municipio == 'TEPEACA'" class="logo-municipio" src="assets/global/images/LogoTepeaca-back.png" alt="Logo Tepeaca">
+    </div>
+    <div class="list-group" *ngIf="permisos.includes('DG100')">
+        <a routerLink="/dashboard" routerLinkActive="active" class="list-group-item font-black">
+            <span>
+                <i class="fas fa-tachometer-alt"></i>
+            </span>
+            Dashboard
+        </a>
+    </div>
+    <div *ngIf="permisos.includes('OP300')" class="list-group">
+        <a (click)="toggleListgroup('subObras')" class="list-group-item font-black d-sm-flex justify-content-sm-between align-items-sm-center" style="cursor: pointer;">
+            <span>
+                <i class="fas fa-briefcase"></i> Obra Pública
+            </span>
+            <i class="fas fa-angle-down"></i>
+        </a>
+        <div id="subObras" class="list-group">
+            <a routerLink="/obra/dashboard" routerLinkActive="router-link-active"  class="list-group-item list-group-child">Dashboard</a>
+            <a routerLink="/obras/mapa" class="list-group-item list-group-child">Mapa</a>
+            <a routerLink="/obras/detalle" class="list-group-item list-group-child">Detalle de Obras</a>
+            <a [href]="'https://apipbrdevelolop.azurewebsites.net/api/reporte/adquisiciones/sumatoria/obra/publica/'+municipio+'/'+ejercicio+'/ADJUDICACIÓN DIRECTA'" class="list-group-item list-group-child" target="_self" download="sumaria.pdf">Analítica</a>
+        </div>
+    </div>
+    <div *ngIf="permisos.includes('AD200')" class="list-group">
+        <a (click)="toggleListgroup('subAdquisiciones')" class="list-group-item font-black d-sm-flex justify-content-sm-between align-items-sm-center" style="cursor: pointer;">
+            <span>
+                <i class="fas fa-building"></i> Adquisiciones
+            </span>
+            <i class="fas fa-angle-down"></i>
+        </a>
+        <div id="subAdquisiciones" class="list-group">
+            <a routerLink="/adquisicion/dashboard" class="list-group-item list-group-child">Dashboard</a>
+            <a routerLink="/adquisiciones/detalle" class="list-group-item list-group-child">Detalle de Adquisiciones</a>
+            <a routerLink="/adquisicion/sumaria" class="list-group-item list-group-child">Analítica</a>
+        </div>
+    </div>
+    <div class="list-group" *ngIf="permisos.includes('CF500')">
+        <a routerLink="/configuracion/usuarios-general" routerLinkActive="active" class="list-group-item font-black">
+            <span>
+                <i class="fas fa-cog"></i>
+            </span>
+            Configuración
+        </a>
+    </div>
+</div> -->
+<div  class="navl" id="sidebarl">
+  <nav class="nav__container">
+    <div>
+      <a [routerLink]="'/'" class="nav__link2 nav__logo">
+         <img *ngIf="municipio == 'SAN ANDRES CHOLULA'" class="logo-municipio" src="assets/global/images/LogoTepeaca.png" alt="Logo Tepeaca">
+        <img *ngIf="municipio == 'TEPEACA'" class="logo-municipio" src="assets/global/images/LogoTepeaca-back.png" alt="Logo Tepeaca">
+        <img *ngIf="municipio !== 'SAN ANDRES CHOLULA' && municipio !== 'TEPEACA'" src="assets/global/images/SimopaLogo.png" />
+
+      </a>
+
+      <div class="nav__list">
+        <div class="nav__items">
+          <h3 class="nav__subtitle">SIMOPA</h3>
+
+          <a *ngIf="permisos.includes('DG100')" routerLink="/dashboard" routerLinkActive="active" class="nav__link">
+            <i class='bx bx-home nav__icon ' ></i>
+            <span class="nav__name">Dahboard General</span>
+          </a>
+
+          <div *ngIf="permisos.includes('OP300')"  class="nav__dropdown">
+            <a routerLink="/obra/dashboard" routerLinkActive="active" class="nav__link">
+                <i class='bx bx-buildings nav__icon'></i>
+                <span class="nav__name">Obra Pública</span>
+                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+            </a>
+
+            <div class="nav__dropdown-collapse">
+                <div class="nav__dropdown-content">
+                    <a routerLink="/obra/dashboard" routerLinkActive="active" class="nav__dropdown-item">Dashboard Obras</a>
+                    <a routerLink="/obras/mapa" routerLinkActive="active" class="nav__dropdown-item">Mapa</a>
+                    <a routerLink="/obras/detalle"  routerLinkActive="active" class="nav__dropdown-item">Detalle de Obras</a>
+                    <a href="#" class="nav__dropdown-item">Analiticas</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="permisos.includes('AD200')" class="nav__dropdown">
+            <a  routerLink="/adquisicion/dashboard" routerLinkActive="active" class="nav__link">
+                <i class='bx bx-wallet nav__icon'></i>
+                <span class="nav__name">Adquisiciones</span>
+                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+            </a>
+
+            <div class="nav__dropdown-collapse">
+                <div class="nav__dropdown-content">
+                    <a routerLink="/adquisicion/dashboard" routerLinkActive="active" class="nav__dropdown-item">Dashboard Adquisiciones</a>
+                    <a routerLink="/adquisiciones/detalle" routerLinkActive="active" class="nav__dropdown-item">Detalle Adquisiciones</a>
+                    <a routerLink="/adquisicion/sumaria" routerLinkActive="active" class="nav__dropdown-item">Analiticas</a>
+                </div>
+            </div>
+
+        </div>
+
+        <a *ngIf="permisos.includes('CF500')" routerLink="/configuracion/usuarios-general" routerLinkActive="active" class="nav__link">
+            <i class='bx bx-wrench nav__icon'></i>
+            <span class="nav__name">Configuración</span>
+        </a>
+
+          <!-- <div class="nav__dropdown">
+              <a [routerLink]="'/'" routerLinkActive="active" class="nav__link">
+                <i class='bx bx-home nav__icon ' ></i>
+                  <span class="nav__name">Dashboard</span>
+                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+              </a>
+
+              <div class="nav__dropdown-collapse">
+                  <div class="nav__dropdown-content">
+                      <a [routerLink]="'/dashboard/inputs'" routerLinkActive="active" class="nav__dropdown-item">Inputs</a>
+                      <a [routerLink]="'/dashboard/map'" routerLinkActive="active" class="nav__dropdown-item">Mapas</a>
+                  </div>
+              </div>
+          </div> -->
+          <!-- <div class="nav__dropdown">
+              <a href="#" class="nav__link">
+                  <i class='bx bx-user nav__icon' ></i>
+                  <span class="nav__name">Profile</span>
+                  <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+              </a>
+
+              <div class="nav__dropdown-collapse">
+                  <div class="nav__dropdown-content">
+                      <a href="#" class="nav__dropdown-item">Passwords</a>
+                      <a href="#" class="nav__dropdown-item">Mail</a>
+                      <a href="#" class="nav__dropdown-item">Accounts</a>
+                  </div>
+              </div>
+          </div>
+
+          <a href="#" class="nav__link">
+              <i class='bx bx-message-rounded nav__icon' ></i>
+              <span class="nav__name">Messages</span>
+          </a> -->
+        </div>
+
+
+        </div>
+    </div>
+
+    <a (click)="logout()" href="#" class="nav__link nav__logout">
+        <i class='bx bx-log-out nav__icon' ></i>
+        <span class="nav__name">Salir</span>
+    </a>
+  </nav>
+</div>
+

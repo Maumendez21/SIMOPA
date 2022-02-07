@@ -1,0 +1,14 @@
+<h2 class="font-black-condensed text-center">Expedientes registrados por ejercicio fiscal</h2>
+
+<div class="flex-item">
+    <div style="display: block;">
+        <canvas baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins"></canvas>
+    </div>
+</div>

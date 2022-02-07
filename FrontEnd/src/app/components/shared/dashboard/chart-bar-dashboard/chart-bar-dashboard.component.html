@@ -1,0 +1,12 @@
+<h3 class="text-center font-black mb-4">{{ title }}</h3>
+
+<div style="display: block">
+    <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [colors]="chartColors"
+        [chartType]="barChartType">
+    </canvas>
+  </div>

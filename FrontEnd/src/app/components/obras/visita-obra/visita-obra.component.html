@@ -1,0 +1,273 @@
+<div class="">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card mb-3">
+				<div class="card-header">
+					<h3 class="card-title text-center font-black-condensed">{{ info.nombreObra }}</h3>
+				</div>
+
+				<div class="media card-body flex-column flex-md-row m-0">
+					<div class="media-body">
+						<div class="row mt-3 mb-3">
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">NUMERO DE PROCEDIMIENTO</h6>
+								<p class="font-regular">{{ info.numeroProcedimiento }}</p>
+							</div>
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">NUMERO DE CONTRATO</h6>
+								<p class="font-regular">{{ info.numeroContrato }}</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">TIPO ADJUDICACIÓN</h6>
+								<p class="font-regular">{{ info.tipoAdjudicacion }}</p>
+							</div>
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">PROVEEDOR</h6>
+								<p class="font-regular">{{ info.proveedor }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card p-4">
+				<div class="row">
+					<div class="col-md-6">
+						<button class="btn btn-custom" data-toggle="modal" data-target="#modalAgregarPrincipalPartida">
+							<i class="fas fa-plus"></i>
+							Agregar Partida
+						</button>
+					</div>
+					<div class="col-md-6 text-right">
+						<button class="btn btn-custom" data-toggle="modal" data-target="#modalVisitaObra">
+							<i class="fas fa-plus"></i>
+							Agregar Visita
+						</button>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col-md-3">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Principales Partidas</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let partida of principalesPartidas">
+										<td>{{ partida.Nombre }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="table-responsive">
+							<table id="datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped dt-responsive w-100">
+								<thead class="font-black-condensed">
+									<tr class="text-center">
+										<th>Visita</th>
+										<th>Fecha</th>
+										<th>Avance Fisico</th>
+										<th>Avance Financiero</th>
+										<th>Acciones</th>
+										<th>Fotografias</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let visita of lista; let i = index" class="text-center">
+										<td>{{ i+1 }}</td>
+										<td>{{ visita.FechaVisita | date: 'dd MMM yyyy h:mm' }}</td>
+										<td>
+											<div class="progress">
+												<div class="progress-bar" role="progressbar" style="width: {{ visita.AvanceFisico }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ visita.AvanceFisico }}%</div>
+											</div>
+										</td>
+										<td>
+											<div class="progress">
+												<div class="progress-bar" role="progressbar" style="width: {{ visita.AvanceFinanciero }}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">{{ visita.AvanceFinanciero }}%</div>
+											</div>
+										</td>
+										<td>
+											<div class="list-icons">
+												<div class="btn-group">
+													<button class="btn-transparent btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														<i class="fas fa-bars"></i>
+													</button>
+
+													<div class="dropdown-menu">
+														<a class="dropdown-item tag" data-toggle="modal" data-target="#modalEditarVisitaObra" (click)="asignarDatosEdicion(visita.Id, visita.FechaVisita, visita.AvanceFisico, visita.AvanceFinanciero, visita.SituacionActual, visita.Problematica)">
+															<i class="fas fa-pen"></i>
+															Editar
+														</a>
+														<a class="dropdown-item tag" data-toggle="modal" data-target="#modalEvidenciaFotografica" (click)="asignarIdVisita(visita.Id)">
+															<i class="far fa-images"></i>
+															Subir Evidencia
+														</a>
+														<a class="dropdown-item tag" data-toggle="modal" data-target="#modalMostrarObservacion" (click)="asignarDatosEdicion(visita.Id, visita.FechaVisita, visita.AvanceFisico, visita.AvanceFinanciero, visita.SituacionActual, visita.Problematica)">
+															<i class="fas fa-clipboard-list"></i>
+															Observaciones
+														</a>
+														<a class="dropdown-item tag" href="https://apipbrdevelolop.azurewebsites.net/api/expedients/obrapublica/reporte/visitaobra/{{ visita.Id }}" target="_self" download="document.pdf">
+															<i class="far fa-clipboard"></i>
+															Reporte
+														</a>
+													</div>
+												</div>
+											</div>
+										</td>
+										<td>
+											<button class="btn btn-primary w-100" (click)="verMosaico(visita.Id)">Ver</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalVisitaObra" tabindex="-1" role="dialog" aria-labelledby="modalVisitaObra" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Visita Obra</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<label for="fecha-visita">Fecha de visita</label>
+				<input type="datetime-local" [(ngModel)]="fechaVisita" id="fecha-visita" class="form-control mb-3" required>
+				<label for="porcentajeFisico">Porcentaje de Avance Fisico</label>
+				<input type="number" [(ngModel)]="porcentajeFisico" id="porcentajeFisico" class="form-control mb-3">
+				<label for="porcentajeFinanciero">Porcentaje de Avance Financiero</label>
+				<input type="number" [(ngModel)]="porcentajeFinanciero" id="porcentajeFinanciero" class="form-control mb-3">
+				<label for="situacionActual">Situacion Actual</label>
+				<textarea [(ngModel)]="situacionActual" id="situacionActual" class="form-control mb-3" rows="4" required></textarea>
+				<label for="problematica">Problematica</label>
+				<textarea [(ngModel)]="problematica" id="problematica" class="form-control mb-3" rows="4" required></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="registrarVisitaObra()">Registrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalEditarVisitaObra" tabindex="-1" role="dialog" aria-labelledby="modalEditarVisitaObra" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Visita Obra</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<label for="fecha-visita">Fecha de visita</label>
+				<input type="datetime-local" [(ngModel)]="fechaVisitaEdicion" id="fecha-visita" class="form-control mb-3" required>
+				<label for="porcentajeFisico">Porcentaje de Avance Fisico</label>
+				<input type="number" [(ngModel)]="porcentajeFisicoEdicion" id="porcentajeFisico" class="form-control mb-3">
+				<label for="porcentajeFinanciero">Porcentaje de Avance Financiero</label>
+				<input type="number" [(ngModel)]="porcentajeFinancieroEdicion" id="porcentajeFinanciero" class="form-control mb-3">
+				<label for="situacionActual">Situacion Actual</label>
+				<textarea [(ngModel)]="situacionActualEdicion" id="situacionActual" class="form-control mb-3" rows="4" required></textarea>
+				<label for="problematicaEdicion">Problematica</label>
+				<textarea [(ngModel)]="problematicaEdicion" id="problematicaEdicion" class="form-control mb-3" rows="4" required></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="actualizarVisitaObra()">Registrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalEvidenciaFotografica" tabindex="-1" role="dialog" aria-labelledby="modalEvidenciaFotografica" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Evidencia Fotografica</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="titulo">Titulo</label>
+					<input [(ngModel)]="tituloEvidencia" type="email" class="form-control" id="titulo">
+				</div>
+				<div class="form-group">
+					<label for="descripcion">Situacion Actual</label>
+					<textarea [(ngModel)]="situacionActual" class="form-control mb-3" rows="4"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="descripcion">Problematica</label>
+					<textarea [(ngModel)]="problematica" class="form-control mb-3" rows="4"></textarea>
+				</div>
+				<div class="form-group files">
+					<input type="file" class="form-control" (change)="onFileChanged($event)">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="registrarEvidenciaFotografica()">Actualizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalAgregarPrincipalPartida" tabindex="-1" role="dialog" aria-labelledby="modalAgregarPrincipalPartida" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Agregar Partida</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="principalPartida">Principal Partida</label>
+					<input [(ngModel)]="principalPartida" type="text" class="form-control" id="titulo">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="registrarPrincipalPartida()">Agregar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalMostrarObservacion" tabindex="-1" role="dialog" aria-labelledby="modalMostrarObservacion" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="font-bold-condensed">Situación Actual: </label>
+					<p>{{ situacionActualEdicion | notext }}</p>
+				</div>
+				<div class="form-group">
+					<label class="font-bold-condensed">Problematica: </label>
+					<p>{{ problematicaEdicion | notext }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

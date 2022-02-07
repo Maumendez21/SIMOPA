@@ -1,0 +1,65 @@
+<div class="row mt-3 mb-3 align-items-center">
+    
+    <div class="col-md-9">
+
+        <nav *ngIf="(adjudicaciones | filtersListaAdjudicaciones: estatus:estatusExpediente:busqueda) as totalItems" class="navbar navbar-expand-lg navbar-light bg-light">
+            
+            <div class="text-center d-lg-none w-100">
+                <button type="button" class="navbar-toggler font-bold-condensed dropdown-toggle" data-toggle="collapse" data-target="#navbarSupportedContent">
+                    <i class="icon-unfold mr-2"></i>
+                    Filtros
+                </button>
+            </div>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <span class="navbar-text font-bold-condensed mr-3">
+                    Filtro:
+                </span>
+
+                <ul class="navbar-nav flex-wrap">
+
+                    <li class="nav-item dropdown" style="cursor: pointer;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Por estatus
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a (click)="changeStatus(2)" class="dropdown-item">Muestra todos</a>
+                            <div class="dropdown-divider"></div>
+                            <a (click)="changeEstatusExpediente('ALTA EN SISTEMA')" class="dropdown-item">Alta en Sistema</a>
+                            <a (click)="changeEstatusExpediente('CARGA EN PROCESO')" class="dropdown-item">Carga en Proceso</a>
+                            <a (click)="changeEstatusExpediente('CARGADO')" class="dropdown-item">CARGADO</a>
+                            <a (click)="changeEstatusExpediente('EN REVISION')" class="dropdown-item">En Revisión</a>
+                            <a (click)="changeEstatusExpediente('REVISADO CON OBSERVACIONES')" class="dropdown-item">Revisado con Observaciones</a>
+                            <a (click)="changeEstatusExpediente('REVISADO SIN OBSERVACIONES CORREGIDO')" class="dropdown-item">Revisado sin Observaciones Corregido</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown" style="cursor: pointer;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOrder" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Orden
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownOrder">
+                            <a (click)="changeOrder('asc')" class="dropdown-item">Ascendente</a>
+                            <a (click)="changeOrder('desc')" class="dropdown-item">Descendente</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <input #termino class="form-control mr-sm-2" type="search" placeholder="Buscar..." (keyup)="buscar(termino.value)">
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mt-2 font-bold-condensed">
+                        Total: <span class="font-regular">{{ totalItems.length }}</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-warning w-100" [routerLink]="['/adquisicion/nuevo-expediente']">
+            Agregar Expediente 
+            <i class="fas fa-upload"></i>
+        </button>
+    </div>
+</div>

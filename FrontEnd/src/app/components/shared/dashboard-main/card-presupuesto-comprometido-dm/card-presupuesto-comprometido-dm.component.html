@@ -1,0 +1,38 @@
+<div class="card card-blue mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <h4 class="font-black text-center">{{ title }}</h4>
+                <h2 class="font-black text-center mt-2">{{ presupuestoAutorizado }}</h2>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">
+                    <i class="fab fa-think-peaks"></i>
+                </h2>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{width: porcentajePresupuestoAutorizado+'%'}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-8">
+                <p>Monto Ejercido sobre Monto Contratado</p>
+            </div>
+            <div class="col-md-4 text-right">
+                <p>{{ porcentajePresupuestoAutorizado }}%</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <p>Avance de Integración Documental</p>
+            </div>
+            <div class="col-md-4 text-right">
+                <p>{{ porcentajeAvanceIntengracionDoc }} %</p>
+            </div>
+        </div>
+    </div>
+</div>

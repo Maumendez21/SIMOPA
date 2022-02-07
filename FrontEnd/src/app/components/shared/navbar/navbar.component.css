@@ -1,0 +1,81 @@
+:root {
+  --main-color: #313540 !important;
+  --secondary-color: #72858c !important;
+}
+
+#navbar {
+  background-color: var(--main-color);
+}
+
+.fa-bars {
+  color: white !important;
+}
+
+#navbar > .btn:focus {
+  box-shadow: none !important;
+}
+
+#navbar a > span {
+  color: white !important;
+}
+
+.dropdown-toggle {
+  color: white !important;
+}
+
+.navbar > #responsive {
+  display: flex !important;
+  float: none !important;
+  vertical-align: top !important;
+}
+
+@media (min-width: 300px) {
+  .navbar-brand {
+    text-align: center;
+  }
+  
+  .navbar-brand > img {
+    width: 35% !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .navbar-brand {
+    text-align: center;
+  }
+  
+  .navbar-brand > img {
+    width: 30% !important;
+  }
+}
+
+@media (min-width: 768px) { 
+  .navbar-brand {
+    text-align: center;
+  }
+  
+  .navbar-brand > img {
+    width: 25% !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-brand {
+    text-align: center;
+  }
+  
+  .navbar-brand > img {
+    width: 22% !important;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .navbar-brand {
+    text-align: left;
+  }
+
+  .navbar-brand > img {
+    width: 17% !important;
+  }
+}

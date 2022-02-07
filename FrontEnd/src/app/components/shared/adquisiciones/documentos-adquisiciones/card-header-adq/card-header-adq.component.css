@@ -1,0 +1,16 @@
+:root {
+    --main-color: #313540 !important;
+    --secondary-color: #72858c !important;
+}
+
+#dropdownMenuButton, #dropdownOther {
+    border-radius: 50px;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+
+#dropdownMenuButton:focus, #dropdownMenuButton:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+}
+

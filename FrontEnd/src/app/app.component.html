@@ -1,0 +1,35 @@
+<div class="d-flex" id="wrapper">
+
+  <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+
+    <div class="" id="page-content-wrapper">
+      <div id="contentBread" class="row">
+        <div class="col">
+            <nav id="breadcrumb">
+                <app-breadcrumb></app-breadcrumb>
+            </nav>
+        </div>
+        <div id="select1"  class="col">
+            <select id="ejercicio" [(ngModel)]="ejercicio" class="form-control mb-3 mt-1" (change)="cambiarEjercicio()">
+                <option value="2021">Ejercicio 2021</option>
+                <option value="2020">Ejercicio 2020</option>
+                <option value="2019">Ejercicio 2019</option>
+                <option value="2018">Ejercicio 2018</option>
+            </select>
+        </div>
+        <div id="select2"  class="col">
+            <select id="ejercicio" [(ngModel)]="auditor" class="form-control mb-3 mt-1" (change)="cambiarAuditor()">
+                <option *ngFor="let audit of auditores" [value]="audit.id">{{ audit.nombre }}</option>
+            </select>
+        </div>
+    </div>
+
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
+
+<div class="my-overlay" *ngIf="loading">
+    <i class="fa fa-spinner fa-spin spinner-big" aria-hidden="true"></i>
+</div>

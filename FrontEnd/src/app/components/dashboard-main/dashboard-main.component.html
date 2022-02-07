@@ -1,0 +1,68 @@
+<app-card-top-dm
+    [presupuestoComprometido]="data.montoEjercidoCabezara"
+    [presupuestoAutorizado]="data.montoContratodoCabezera"
+    [needleValue]="needleValue">
+</app-card-top-dm>
+
+<div class=" mb-3 mt-3">
+    <div class="row">
+        <div class="col-md-6">
+
+            <app-card-presupuesto-comprometido-dm
+                [title]="titleAdquisicion"
+                [presupuestoAutorizado]="data.montoContratoAdquisiciones"
+                [porcentajePresupuestoAutorizado]="data.PorcentajeAdquisiciones"
+                [porcentajeAvanceIntengracionDoc]="data.PorcentajeAdj">
+            </app-card-presupuesto-comprometido-dm>
+        </div>
+        <div class="col-md-6">
+
+            <app-card-presupuesto-comprometido-dm
+                [title]="titleObra"
+                [presupuestoAutorizado]="data.montoContratoObraPublica"
+                [porcentajePresupuestoAutorizado]="data.PorcentajeObraPublica"
+                [porcentajeAvanceIntengracionDoc]="data.PorcentajeObra">
+            </app-card-presupuesto-comprometido-dm>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <app-table-info-global-dm
+                [title]="titleAdquisicion"
+                [info]="infoGlobalAdquisiciones"></app-table-info-global-dm>
+        </div>
+        <div class="col-md-6">
+            <app-table-info-global-dm
+                [title]="titleObra"
+                [info]="infoGlobalObras"></app-table-info-global-dm>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <app-table-info-global-ejercido [info]="infoGlobalAdquisiciones"></app-table-info-global-ejercido>
+        </div>
+        <div class="col-md-6">
+            <app-table-info-global-ejercido [info]="infoGlobalObrasEjercido"></app-table-info-global-ejercido>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-md-6 text-center">
+            <app-card-graphic-pie
+                [title]="titleAdquisicion"
+                [info]="infoPieAdquisiciones"></app-card-graphic-pie>
+        </div>
+        <div class="col-md-6 text-center">
+            <app-card-graphic-pie
+                [title]="titleObra"
+                [info]="infoPieObras"></app-card-graphic-pie>
+        </div>
+    </div>
+    <div class="row mt-4 mb-4">
+        <div class="col-md-12">
+            <app-card-chart-line [info]="infoLine"></app-card-chart-line>
+        </div>
+    </div>
+</div>

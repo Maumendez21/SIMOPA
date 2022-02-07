@@ -1,0 +1,26 @@
+<div class="modal fade" id="modalChangeEstatusDocument" tabindex="-1" role="dialog" aria-labelledby="modalChangeEstatusDocument" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Cambiar Estatus</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+						<select [(ngModel)]="estatusChangeDocument" class="form-control mb-3">
+							<option *ngIf="role != 'Coordinador'" value="SI">SI</option>
+							<option value="N/A">N/A</option>
+							<option value="NO">NO</option>
+							<option value="DOC. ERRONEO">DOC. ERRONEO</option>
+						</select>
+
+						<button class="btn btn-primary w-100" data-dismiss="modal" (click)="cambiarEstatusDocumento()">Guardar</button>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<div class="">
+    <div class="row justify-content-center">
+        <div class="col" *ngFor="let card of cards; let i = index;">
+            <app-card-dashboard [data]="card" [total]="dataCards[i]"></app-card-dashboard>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <app-chart-dashboard
+                [label]="'Avance de revisión Adquisición'"
+                [doughnutChartDataInput]="doughnutChartData">
+            </app-chart-dashboard>
+        </div>
+        <div class="col-md-6">
+            <app-table-documents
+                [expedientes]="expedientes"
+                [router]="'/adquisiciones/expediente'">
+            </app-table-documents>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <app-chart-doughnut-dashboard
+                [title]="'Tipo de procedimiento'"
+                [labels]="doughnutLabels"
+                [data]="doughnutData"
+                [colors]="doughnutColors"></app-chart-doughnut-dashboard>
+        </div>
+        <div class="col-md-6">
+            <app-chart-bar-dashboard
+                [currency]="true"
+                [title]="'Monto Contratado por tipo de procedimiento'"
+                [labels]="labelsBar"
+                [data]="dataBar"></app-chart-bar-dashboard>
+        </div>
+    </div>
+    <div class="row mt-4 mb-4">
+        <div class="col-md-12">
+            <app-chart-bar-dashboard
+                [title]="'Expedientes e integración documental'"
+                [labels]="labelsBarDoc"
+                [data]="dataBarDoc"></app-chart-bar-dashboard>
+        </div>
+    </div>
+</div>

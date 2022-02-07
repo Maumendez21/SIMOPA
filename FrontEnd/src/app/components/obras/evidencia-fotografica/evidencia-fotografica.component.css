@@ -1,0 +1,6 @@
+.btn-custom {
+    border-radius: 50px;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}

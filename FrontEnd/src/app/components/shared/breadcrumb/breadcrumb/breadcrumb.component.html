@@ -1,0 +1,6 @@
+<div class="breadcrumb font-black">
+    <a class="breadcrumb-item tag-blue" *ngFor="let part of parts" (click)="irUbicacion(part.route)">
+        {{ part.name }}
+    </a>
+    <a class="breadcrumb-item active" >{{ activePage }}</a>
+</div>

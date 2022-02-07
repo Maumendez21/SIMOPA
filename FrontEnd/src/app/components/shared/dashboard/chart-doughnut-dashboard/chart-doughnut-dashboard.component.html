@@ -1,0 +1,11 @@
+<h3 class="text-center font-black mb-4">{{ title }}</h3>
+
+<div style="display: block">
+    <canvas baseChart
+        [data]="doughnutChartData"
+        [labels]="doughnutChartLabels"
+        [chartType]="doughnutChartType"
+        [options]="doughnutChartOptions"
+        [colors]="doughnutChartColors">
+    </canvas>
+</div>

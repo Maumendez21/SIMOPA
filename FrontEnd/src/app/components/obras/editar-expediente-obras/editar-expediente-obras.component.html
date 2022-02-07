@@ -1,0 +1,164 @@
+<div class=" mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="font-bold-condensed">Nombre de obra *</label>
+                <input type="text" class="form-control" [(ngModel)]="nombreObra" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Procedimiento *</label>
+                <input type="text" class="form-control" [(ngModel)]="procedimiento" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Programa</label>
+                <input type="text" class="form-control" [(ngModel)]="programa">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Ejecutor *</label>
+                <input type="text" class="form-control" [(ngModel)]="ejecutor" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-bold-condensed">Localidad *</label>
+                <input type="text" class="form-control" [(ngModel)]="localidad" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-bold-condensed">Proyecto</label>
+                <input type="text" class="form-control" [(ngModel)]="proyecto">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Numero de Obra *</label>
+                <input type="text" class="form-control" [(ngModel)]="numeroObra" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Responsable</label>
+                <input type="text" class="form-control" [(ngModel)]="responsable">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Modalidad *</label>
+                <input type="text" class="form-control" [(ngModel)]="modalidad" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Tipo de Adjudicacion *</label>
+                <select class="form-control" [(ngModel)]="tipoAdjudicacion">
+                    <option value="INVITACIÓN RESTRINGIDA A 5 PROVEEDORES">INVITACIÓN RESTRINGIDA A 5 PROVEEDORES</option>
+                    <option value="INVITACIÓN RESTRINGIDA A 3 PROVEEDORES">INVITACIÓN RESTRINGIDA A 3 PROVEEDORES</option>
+                    <option value="LICITACIÓN PÚBLICA">LICITACIÓN PÚBLICA</option>
+                    <option value="ADJUDICACIÓN DIRECTA">ADJUDICACIÓN DIRECTA</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Tipo de Contrato *</label>
+                <input type="text" class="form-control" [(ngModel)]="tipoContrato" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Tipo Proveedor</label>
+                <input type="text" class="form-control" [(ngModel)]="tipoProveedor">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Proveedor</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Numero de Procedimiento *</label>
+                <input type="text" class="form-control" [(ngModel)]="numeroProcedimiento" required readonly>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Fecha de Procedimiento</label>
+                <input type="date" class="form-control" [(ngModel)]="fechaProcedimiento">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Numero de Contrato *</label>
+                <input type="text" class="form-control" [(ngModel)]="numeroContrato" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Fecha de Contrato</label>
+                <input type="date" class="form-control" [(ngModel)]="fechaContrato">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Monto Asignado</label>
+                <input type="number" class="form-control" [(ngModel)]="montoAsignado">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Monto Contratado *</label>
+                <input type="number" class="form-control" [(ngModel)]="montoContrato" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Monto Ejercido</label>
+                <input type="number" class="form-control" [(ngModel)]="montoEjercicio">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Ejercicio *</label>
+                <input type="text" class="form-control" [(ngModel)]="ejercicio" readonly>
+                <!--
+                <select class="form-control" [(ngModel)]="ejercicio">
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                </select>
+                -->
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-custom font-bold-condensed" (click)="actualizarExpediente()">
+                <i class="far fa-clipboard"></i>
+                Actualizar Expediente
+            </button>
+        </div>
+    </div>
+</div>

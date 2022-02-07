@@ -1,0 +1,20 @@
+<div style="overflow-y: scroll; height: 250px !important;">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>Nombre</th>
+                <th>Avance</th>
+            </tr>
+            <tr *ngFor="let expediente of expedientes">
+                <td>
+                    <a [routerLink]="[router, expediente.idExpediente]" [title]="expediente.NombreExpediente">{{ expediente.NombreExpedienteCorto }}</a>
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" [className]="expediente.avanceDocumental >= 90 ? 'bg-success' : 'bg-danger'"  style="width: {{ expediente.avanceDocumental }}%">{{ expediente.avanceDocumental }}%</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="card mb-3" class="border-left-{{ estatusColor }}">
+    <div class="card-body">
+
+        <div class="col-md-12">
+            <div>
+                <h4>
+                    <a class="font-black" (click)="verCheckList(adjudicacion.Id)" style="color: #5b88af; cursor: pointer;">{{ adjudicacion.objetoContrato }}</a>
+                </h4>
+
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <a class="font-bold-condensed">Tipo de Adjudicación</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="badge bg-blue align-top font-regular" style="font-size: 13px;">{{ adjudicacion.tipoAdjudicacion }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <a *ngIf="adjudicacion.tipoAdjudicacion == cedulaComprasUrgentes" class="font-bold-condensed">N° Requisición</a>
+                            <a *ngIf="adjudicacion.tipoAdjudicacion != cedulaComprasUrgentes" class="font-bold-condensed">N° Adjudicación</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="badge bg-blue align-top font-regular" style="font-size: 13px;">{{ adjudicacion.numeroAdjudicacion }}</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <a *ngIf="adjudicacion.tipoAdjudicacion == cedulaComprasUrgentes" class="font-bold-condensed">Suficiencia Presupuestal</a>
+                            <a *ngIf="adjudicacion.tipoAdjudicacion != cedulaComprasUrgentes" class="font-bold-condensed">N° Contrato</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="badge bg-blue align-top font-regular" style="font-size: 13px;">{{ adjudicacion.numeroContrato | notext }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <a class="font-bold-condensed">Proveedor</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="badge bg-blue align-top font-regular" style="font-size: 13px;">{{ adjudicacion.proveedor | notext }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress font-bold-condensed mb-2 mt-4" style="height: 0.3rem;">
+                    <div class="progress-bar" [className]="adjudicacion.porcentajeAvance >= 90 ? 'bg-success' : 'bg-danger'" style="width: {{ adjudicacion.porcentajeAvance }}%">
+                        <span class="sr-only">{{ adjudicacion.porcentajeAvance }}% Complete</span>
+                    </div>
+                </div>
+                <div class="font-bold-condensed">
+                    <span class="float-right">{{ adjudicacion.porcentajeAvance }}%</span>
+                    Avance
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+        <span class="font-bold-condensed">Monto contratado: <span class="font-regular">${{ adjudicacion.montoAdjudicado | notext }} MXN</span></span>
+
+        <ul class="list-inline mb-0 mt-2 mt-sm-0">
+            <li class="list-inline-item dropdown">
+                <a href="#" class="text-default dropdown-toggle"
+                    data-toggle="dropdown"><i class="icon-menu7"></i></a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a (click)="verCheckList(adjudicacion.Id)" routerLinkActive="router-link-active"  class="dropdown-item">
+                        <i class="icon-alarm-add"></i> 
+                        Ver Check list
+                    </a>
+                    <a class="dropdown-item" href="https://apipbrdevelolop.azurewebsites.net/api/expedients/cedula/adownload?id={{ adjudicacion.Id }}" target="_self" download="document.xlsx">
+                        <i class="icon-attachment"></i>
+                        Descargar Check List
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

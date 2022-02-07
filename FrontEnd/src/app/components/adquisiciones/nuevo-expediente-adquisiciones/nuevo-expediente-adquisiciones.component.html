@@ -1,0 +1,82 @@
+<div class=" mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="font-bold-condensed">Objeto del Contrato *</label>
+                <input type="text" class="form-control" [(ngModel)]="objetoContrato" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-bold-condensed">Tipo de Adjudicación *</label>
+                <select class="form-control" [(ngModel)]="tipoAdjudicacion" required>
+                    <option value="INVITACIÓN A CUANDO MENOS TRES PERSONAS">INVITACIÓN A CUANDO MENOS TRES PERSONAS</option>
+                    <option value="CONCURSO POR INVITACIÓN">CONCURSO POR INVITACIÓN</option>
+                    <option value="ADJUDICACIÓN DIRECTA">ADJUDICACIÓN DIRECTA</option>
+                    <option value="LICITACIÓN PÚBLICA">LICITACIÓN PÚBLICA</option>
+                    <option value="REVISIÓN DE LAS COMPRAS URGENTES Y ESPECIALES -33 MIL">REVISIÓN DE LAS COMPRAS URGENTES Y ESPECIALES -33 MIL</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label *ngIf="tipoAdjudicacion == 'REVISIÓN DE LAS COMPRAS URGENTES Y ESPECIALES -33 MIL'" class="font-bold-condensed">Numero de Requisición *</label>
+                <label *ngIf="tipoAdjudicacion != 'REVISIÓN DE LAS COMPRAS URGENTES Y ESPECIALES -33 MIL'" class="font-bold-condensed">Numero de Adjudicación *</label>
+                <input type="text" class="form-control" [(ngModel)]="numeroAdjudicacion" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label *ngIf="tipoAdjudicacion == 'REVISIÓN DE LAS COMPRAS URGENTES Y ESPECIALES -33 MIL'" class="font-bold-condensed">Suficiencia Presupuestal *</label>
+                <label *ngIf="tipoAdjudicacion != 'REVISIÓN DE LAS COMPRAS URGENTES Y ESPECIALES -33 MIL'" class="font-bold-condensed">Numero de Contrato *</label>
+                <input type="text" class="form-control" [(ngModel)]="numeroContrato" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-bold-condensed">Entidad *</label>
+                <input type="text" class="form-control" [(ngModel)]="entidad" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-bold-condensed">Proveedor Adjudicado *</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedorAdjudicado" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-bold-condensed">Monto de la Adjudicación *</label>
+                <input type="number" class="form-control" [(ngModel)]="montoAdjudicacion" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-bold-condensed">Origen del Recurso *</label>
+                <input type="text" class="form-control" [(ngModel)]="origenRecurso" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="font-bold-condensed">Observaciones Generales</label>
+                <textarea class="form-control" [(ngModel)]="observacionesGenerales"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-custom font-bold-condensed" (click)="registrarExpediente()">
+                <i class="far fa-clipboard"></i>
+                Registrar Expediente
+            </button>
+        </div>
+    </div>
+</div>

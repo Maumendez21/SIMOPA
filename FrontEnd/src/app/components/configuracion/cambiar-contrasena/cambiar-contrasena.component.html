@@ -1,0 +1,22 @@
+<div class="">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Cambiar Contraseña</h2>
+            <div class="form-group mt-4">
+                <label>Contraseña Actual</label>
+                <input type="password" class="form-control" [(ngModel)]="contrasenaActual">
+            </div>
+            <div class="form-group">
+                <label>Nueva Contraseña</label>
+                <input type="password" class="form-control" [(ngModel)]="nuevaContrasena">
+            </div>
+            <div class="form-group">
+                <label>Repetir Contraseña</label>
+                <input type="password" class="form-control" [(ngModel)]="repetirContrasena">
+            </div>
+            <div class="text-right">
+                <button type="button" class="btn btn-primary" (click)="actualizarContrasena()">Actualizar Contraseña</button>
+            </div>
+        </div>
+    </div>
+</div>

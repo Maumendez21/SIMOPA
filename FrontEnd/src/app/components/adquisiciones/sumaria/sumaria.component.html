@@ -1,0 +1,10 @@
+<div class="">
+    <div class="row">
+        <div class="col-md-6" *ngFor="let tipo of tiposAdjudicacion">
+            <a class="btn btn-{{ tipo.class }} text-lowercase w-100 mb-4" [href]="'https://apipbrdevelolop.azurewebsites.net/api/reporte/adquisiciones/sumatoria/'+tipo.route+'/'+ejercicio+'/'+tipo.name" target="_self" download="sumaria.pdf" style="border-radius: 0px;">
+                {{ tipo.name }}
+                <i class="fas fa-download"></i>
+            </a>
+        </div>
+    </div>
+</div>

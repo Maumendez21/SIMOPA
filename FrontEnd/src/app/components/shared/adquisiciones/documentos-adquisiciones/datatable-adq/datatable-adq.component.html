@@ -1,0 +1,87 @@
+<div class="card p-4">
+    <button id="openModalButton" hidden="true" data-toggle="modal" data-target="#modalChangeEstatusDocument">Press</button>
+    <div class="table-responsive">
+        <table id="datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped dt-responsive w-100">
+            <thead class="font-black-condensed">
+                <tr>
+                    <th>Clave</th>
+                    <th>Documento</th>
+                    <th style="display: none;">Grupo</th>
+                    <th class="text-center filtersearch">Estatus</th>
+                    <th class="text-center">Documento</th>
+                    <th class="text-center">Acciones</th>
+                    <th>Observaciones y Recomendaciones</th>
+                    <th class="text-center">Cargar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let documento of documentos; let i = index">
+                    <td class="text-center">{{ documento.clave }}</td>
+                    <td class="w-50 font-bold-condensed" [title]="documento.fundamento">
+                        {{ documento.documento }}
+                    </td>
+                    <td style="display:none;">{{ documento.grupo }}</td>
+                    <td class="text-center">
+                        <span *ngIf="documento.estatus === 'SI'" class="badge badge-success">{{ documento.estatus }}</span>
+                        <span *ngIf="documento.estatus === 'NO'" class="badge badge-danger">{{ documento.estatus }}</span>
+                        <span *ngIf="documento.estatus === 'N/A'"><span class="badge badge-primary">{{ documento.estatus }}</span></span>
+                        <span *ngIf="documento.estatus === 'DOC. ERRONEO'" class="badge badge-warning">{{ documento.estatus }}</span>
+                        <span *ngIf="documento.estatus === 'POR REVISAR'" class="badge badge-dark">{{ documento.estatus }}</span>
+                    </td>
+                    <td class="text-center">
+                        <a *ngIf="documento.downloadLinkDocument" [href]="documento.downloadLinkDocument" target="_self" download="document.pdf" class="badge badge-success">Disponible</a>
+                        <span *ngIf="!documento.downloadLinkDocument" class="badge badge-danger">No Disponible</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="btn-group">
+                                <button class="btn-transparent btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+
+                                <div class="dropdown-menu">
+
+                                    <a *ngIf="rol != 'Coordinador'" class="dropdown-item" data-toggle="modal" data-target="#modalChangeEstatusDocument" (click)="setDataDocument(i, documento.clave)">
+                                        <i class="far fa-check-circle"></i>
+                                        Cambiar Estatus
+                                    </a>
+
+                                    <a *ngIf="documento.downloadLinkDocument" [href]="documento.downloadLinkDocument" target="_self" download="document.pdf" class="dropdown-item">
+                                        <i class="fas fa-file-download"></i> 
+                                        Descargar Documento
+                                    </a>
+
+                                    <a *ngIf="!documento.downloadLinkDocument" class="dropdown-item">
+                                        <i class="fas fa-times"></i> 
+                                        Documento No Disponible
+                                    </a>
+
+                                    <a *ngIf="documento.downloadLinkDocument && rol != 'Coordinador'" class="dropdown-item" (click)="modalEliminarDocumento(documento, i)">
+                                        <i class="fas fa-trash"></i> 
+                                        Eliminar Documento
+                                    </a>
+
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#modalObservacionesRecomendaciones" (click)="getObservaciones(documento.clave, i)">
+                                        <i class="fas fa-edit"></i>
+                                        Registrar Observación
+                                    </a>
+
+                                    <a *ngIf="documento.downloadLinkDocument" class="dropdown-item" (click)="setViewerDoc(documento.downloadLinkDocument)" data-toggle="modal" data-target="#modalVerDocumento">
+                                        <i class="fas fa-eye"></i> 
+                                        Ver Documento
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center">{{ documento.comentario | notext }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalDocumento" (click)="setInfoDocumentoPdf(documento, i)" [disabled]="documento.estatus === 'N/A'">
+                            <i class="fas fa-file-upload"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

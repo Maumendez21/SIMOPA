@@ -1,0 +1,68 @@
+<div class="modal fade" id="modalObservacionesRecomendaciones" tabindex="-1" role="dialog" aria-labelledby="modalObservacionesRecomendaciones" aria-hidden="true">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Observaciones y Recomendaciones</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+					<div class="col-md-4">
+						<h6>Nueva Observación y Recomendación</h6>
+						<div class="text-right">
+							<button *ngIf="edicionComentarioRecomendacion" class="btn btn-primary" (click)="changeEstatusUpdateComentarios(false)">
+								<i class="fas fa-plus"></i>
+							</button>
+						</div>
+						<select *ngIf="edicionComentarioRecomendacion" class="form-control mt-3 mb-3" [(ngModel)]="estatusComentarioRecomendacion">
+							<option value="1">Atendido</option>
+							<option value="2">No Atendido</option>
+						</select>
+						<textarea [(ngModel)]="nuevoComentario" class="form-control mb-3" rows="4" placeholder="Observación"></textarea>
+						<textarea [(ngModel)]="nuevaRecomendacion" class="form-control" rows="4" placeholder="Recomendación"></textarea>
+						<div class="text-right">
+							<button *ngIf="edicionComentarioRecomendacion" class="btn btn-primary mt-3" (click)="actualizarObservacion()" [disabled]="disabledBtnObservacionesRecomendaciones">Actualizar</button>
+							<button *ngIf="!edicionComentarioRecomendacion" class="btn btn-primary mt-3" (click)="registrarObservacion()" [disabled]="disabledBtnObservacionesRecomendaciones">Agregar</button>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<th>#</th>
+									<th>Observaciones</th>
+									<th>Recomendaciones</th>
+									<th>Estatus</th>
+									<th></th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let item of observaciones; let i = index">
+										<td>{{ i+1 }}</td>
+										<td>{{ item.Observacion | notext }}</td>
+										<td>{{ item.Recomendacion | notext }}</td>
+
+										<td *ngIf="item.Estatus == 1">
+											<span class="badge badge-success">Atendido</span>
+										</td>
+
+										<td *ngIf="item.Estatus == 2">
+											<span class="badge badge-danger">No Atendido</span>
+										</td>
+
+										<td>
+											<button class="btn btn-primary" (click)="setDataUpdateComentarios(item)">
+												<i class="fas fa-pen"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>

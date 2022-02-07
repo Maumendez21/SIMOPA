@@ -1,0 +1,146 @@
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-{{ estatusColor }} btn-dropdown-custom dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ estatus }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" (click)="actualizarEstatus('ALTA EN SISTEMA')">
+                            <span>
+                                <img src="assets/global/images/status/dot_blue.png" alt="Dot">
+                            </span>
+                            Alta en Sistema
+                        </a>
+                        <a class="dropdown-item" (click)="actualizarEstatus('CARGA EN PROCESO')">
+                            <span>
+                                <img src="assets/global/images/status/dot_gray.png" alt="Dot">
+                            </span>
+                            Carga en Proceso
+                        </a>
+                        <a class="dropdown-item" (click)="actualizarEstatus('CARGADO')">
+                            <span>
+                                <img src="assets/global/images/status/dot_blue_cargado.png" alt="Dot">
+                            </span>
+                            Cargado
+                        </a>
+                        <a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('EN REVISION')">
+                            <span>
+                                <img src="assets/global/images/status/dot_yellow.png" alt="Dot">
+                            </span>
+                            En Revisión
+                        </a>
+                        <a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('EN SOLVENTACION')">
+                            <span>
+                                <img src="assets/global/images/status/dot_purple.png" alt="Dot">
+                            </span>
+                            En Solventación
+                        </a>
+                        <a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('REVISADO CON OBSERVACIONES')">
+                            <span>
+                                <img src="assets/global/images/status/dot_red.png" alt="Dot">
+                            </span>
+                            Revisado con Observaciones
+                        </a>
+                        <a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('REVISADO SIN OBSERVACIONES CORREGIDO')">
+                            <span>
+                                <img src="assets/global/images/status/dot_green.png" alt="Dot">
+                            </span>
+                            Revisado sin Observaciones Corregido
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="btn-group">
+                    <div class="dropdown mr-2">
+                        <a class="btn btn-warning mr-2 mb-3" type="button" id="dropdownOther" title="Evidencia Fotografica" [routerLink]="['/adquisicion/evidencia-fotografica/', idExpediente]">
+                            <span class="icon-rounded">
+                                <i class="fas fa-camera"></i>
+                            </span>
+                        </a>
+                        <button class="btn btn-warning font-bold-condensed text-uppercase dropdown-toggle mb-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="icon-rounded">
+                                <i class="fas fa-file-alt"></i>
+                            </span> 
+                            Acciones
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item tag" [routerLink]="['/adquisicion/actualizar-expediente', idExpediente]" >
+                                <i class="fas fa-pen"></i> 
+                                Actualizar Expediente
+                            </a>
+                            <a *ngIf="!info['ExpedienteOwner']" class="dropdown-item tag" (click)="asignarmeExpediente()">
+                                <i class="fas fa-edit"></i>
+                                Asignarme Expediente
+                            </a>
+                            <a class="dropdown-item tag" (click)="cargarAnexos()" data-toggle="modal" data-target="#modalCargarAnexos">
+                                <i class="fas fa-upload"></i> 
+                                Carga de Anexos
+                            </a>
+                            <a class="dropdown-item tag">
+                                <i class="fas fa-download"></i> 
+                                Descargar Expediente
+                            </a>
+                            <a [href]="descargarObservacionesRecomendaciones(idExpediente)" target="_self" download="document.pdf" class="dropdown-item tag">
+                                <i class="fas fa-download"></i> 
+                                Descargar Observaciones y Recomendaciones
+                            </a>
+                            <a class="dropdown-item tag" data-toggle="modal" data-target="#modalObservacionGeneral">
+                                <i class="fas fa-edit"></i> 
+                                Registrar Observación
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="card-title text-center w-100 font-black-condensed">{{ info['objetoContrato'] }}</h3>
+    </div>
+
+    <div class="media card-body flex-column flex-md-row m-0">
+        <div class="media-body">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <h6 class="media-title font-black">TIPO DE ADJUDICACIÓN</h6>
+                    <p class="font-regular">{{ info['tipoAdjudicacion'] }}</p>
+                </div>
+                <div class="col-6 text-center">
+                    <h6 class="media-title font-black">NUMERO DE ADJUDICACIÓN</h6>
+                    <p class="font-regular">{{ info['numeroAdjudicacion'] }}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 text-center">
+                    <h6 class="media-title font-black">NUMERO DE CONTRATO</h6>
+                    <p class="font-regular">{{ info['numeroContrato'] }}</p>
+                </div>
+                <div class="col-6 text-center">
+                    <h6 class="media-title font-black">MONTO ADJUDICADO</h6>
+                    <p class="font-regular">${{ info['montoAdjudicado'] }} MXN</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <h6 class="media-title font-black">PROVEEDOR</h6>
+                    <p class="font-regular">{{ info['proveedorAdjudicado'] }}</p>
+                </div>
+
+                <div class="col-md-6 text-center">
+                    <h6 class="media-title font-black">AUDITOR</h6>
+                    <p class="font-regular">{{ info['NombreAuditor'] }}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h6 class="media-title font-black">Observaciones Generales</h6>
+                    <p class="font-regular">{{ info['ObservacionesGenerales'] | notext }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+:root {
+    --main-color: #313540 !important;
+    --secondary-color: #72858c !important;
+}
+
+#sidebar-wrapper {
+    background-color: var(--secondary-color);
+}
+
+#sidebar-wrapper .list-group > .list-group-item {
+    background-color: var(--secondary-color);
+    color: white !important;
+    border: 0px;
+}
+
+#sidebar-wrapper .list-group > .list-group-child {
+    background-color: var(--main-color);
+    color: white !important;
+    border: 0px;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    background-color: white;
+    border: 5px solid #72858c;
+}
+
+.logo-municipio {
+    width: 150px;
+}

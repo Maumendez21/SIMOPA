@@ -1,0 +1,61 @@
+<div class="">
+	<div class="row">
+		<div class="col-md-12">
+
+			<app-card-header-adq
+				[idExpediente]="idExpediente"
+				[estatusColor]="estatusColor"
+				[estatus]="estatus"
+				[info]="info"
+				[cargarAnexos]="cargarAnexos">
+			</app-card-header-adq>
+
+			<app-datatable-adq
+				[idExpediente]="idExpediente"
+				[documentos]="documentos"
+				[setDataDocument]="setDataDocument"
+				[getObservaciones]="getObservaciones"
+				[setViewerDoc]="setViewerDoc"
+				[setInfoDocumentoPdf]="setInfoDocumentoPdf">
+			</app-datatable-adq>
+		</div>
+	</div>
+</div>
+
+<app-carga-documento-modal-adq
+	[idExpediente]="idExpediente"
+	[documentos]="documentos"
+	[index]="index"
+	[document]="document">
+</app-carga-documento-modal-adq>
+
+<app-registrar-observacion-modal-adq
+	[idExpediente]="idExpediente"
+	[observacionGeneral]="observacionGeneral"
+	[info]="info">
+</app-registrar-observacion-modal-adq>
+
+<app-ver-documento-modal-adq [doc]="doc">
+</app-ver-documento-modal-adq>
+
+<app-cambiar-estatus-modal-adq
+	[idExpediente]="idExpediente"
+	[claveExpediente]="claveExpediente"
+	[documentos]="documentos"
+	[indexDocument]="indexDocument">
+</app-cambiar-estatus-modal-adq>
+
+<app-observaciones-recomendaciones-modal-adq
+	[idExpediente]="idExpediente"
+	[claveExpediente]="claveExpediente"
+	[documentos]="documentos"
+	[indexDocument]="indexDocument"
+	[observaciones]="observaciones"
+	[getObservaciones]="getObservaciones">
+</app-observaciones-recomendaciones-modal-adq>
+
+<app-anexos-modal-adq
+	[idExpediente]="idExpediente"
+	[anexos]="anexos"
+	[cargarAnexos]="cargarAnexos">
+</app-anexos-modal-adq>

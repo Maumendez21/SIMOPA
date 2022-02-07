@@ -1,0 +1,537 @@
+<div class="">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="btn-group">
+								<button type="button" class="btn btn-{{ estatusColor }} btn-dropdown-custom dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{ estatus }}
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" (click)="actualizarEstatus('ALTA EN SISTEMA')">
+										<span>
+											<img src="assets/global/images/status/dot_blue.png" alt="Dot">
+										</span>
+										Alta en Sistema
+									</a>
+									<a class="dropdown-item" (click)="actualizarEstatus('CARGA EN PROCESO')">
+										<span>
+											<img src="assets/global/images/status/dot_gray.png" alt="Dot">
+										</span>
+										Carga en Proceso
+									</a>
+									<a class="dropdown-item" (click)="actualizarEstatus('CARGADO')">
+										<span>
+											<img src="assets/global/images/status/dot_blue_cargado.png" alt="Dot">
+										</span>
+										Cargado
+									</a>
+									<a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('EN REVISION')">
+										<span>
+											<img src="assets/global/images/status/dot_yellow.png" alt="Dot">
+										</span>
+										En Revisión
+									</a>
+									<a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('EN SOLVENTACION')">
+										<span>
+											<img src="assets/global/images/status/dot_purple.png" alt="Dot">
+										</span>
+										En Solventación
+									</a>
+									<a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('REVISADO CON OBSERVACIONES')">
+										<span>
+											<img src="assets/global/images/status/dot_red.png" alt="Dot">
+										</span>
+										Revisado con Observaciones
+									</a>
+									<a *ngIf="rol != 'Coordinador'" class="dropdown-item" (click)="actualizarEstatus('REVISADO SIN OBSERVACIONES CORREGIDO')">
+										<span>
+											<img src="assets/global/images/status/dot_green.png" alt="Dot">
+										</span>
+										Revisado sin Observaciones Corregido
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 text-right">
+							<div class="btn-group">
+								<a class="btn btn-warning mr-2 mb-3" type="button" id="dropdownOther" title="Visita de Obra" [routerLink]="['/obra/visita-obra', idExpediente]">
+									<span class="icon-rounded">
+										<i class="fas fa-building"></i>
+									</span>
+								</a>
+								<a class="btn btn-warning mr-2 mb-3" type="button" id="dropdownOther" title="Evidencia Fotografica" [routerLink]="['/obra/evidencia-fotografica', idExpediente]">
+									<span class="icon-rounded">
+										<i class="fas fa-camera"></i>
+									</span>
+								</a>
+								<button class="btn btn-warning mr-2 mb-3" type="button" id="dropdownOther" title="Geolocalización" data-toggle="modal" data-target="#modalUbicacionMapa">
+									<span class="icon-rounded">
+										<i class="fas fa-map-marker-alt"></i>
+									</span>
+								</button>
+								<div class="dropdown mr-2">
+									<button class="btn btn-warning font-bold-condensed text-uppercase dropdown-toggle mb-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span class="icon-rounded">
+											<i class="fas fa-file-alt"></i>
+										</span>
+										Acciones
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item tag" [routerLink]="['/obra/actualizar-expediente', idExpediente]">
+											<i class="fas fa-pen"></i>
+											Actualizar Expediente
+										</a>
+										<a *ngIf="!info['ExpedienteOwner']" class="dropdown-item tag" (click)="asignarmeExpediente()">
+											<i class="fas fa-edit"></i>
+											Asignarme Expediente
+										</a>
+										<a class="dropdown-item tag" data-toggle="modal" data-target="#modalCargarAnexos" (click)="cargarAnexos()">
+											<i class="fas fa-upload"></i>
+											Carga de Anexos
+										</a>
+										<a class="dropdown-item tag">
+											<i class="fas fa-download"></i>
+											Descargar Expediente
+										</a>
+										<a [href]="descargarObservacionesRecomendaciones(idExpediente)" target="_self" download="document.pdf" class="dropdown-item tag">
+											<i class="fas fa-download"></i>
+											Descargar Observaciones y Recomendaciones
+										</a>
+										<a class="dropdown-item tag" data-toggle="modal" data-target="#modalObservacionGeneral">
+											<i class="fas fa-edit"></i>
+											Registrar Observación
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h3 class="card-title text-center font-black-condensed">{{ info['nombreObra'] }}</h3>
+				</div>
+
+				<div class="media card-body flex-column flex-md-row m-0">
+					<div class="media-body">
+						<div class="row mt-3 mb-3">
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">NUMERO DE PROCEDIMIENTO</h6>
+								<p class="font-regular">{{ info['numeroProcedimiento'] }}</p>
+							</div>
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">NUMERO DE CONTRATO</h6>
+								<p class="font-regular">{{ info['numeroContrato'] }}</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">TIPO ADJUDICACIÓN</h6>
+								<p class="font-regular">{{ info['tipoAdjudicacion'] }}</p>
+							</div>
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">PROVEEDOR</h6>
+								<p class="font-regular">{{ info['proveedor'] }}</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">AUDITOR</h6>
+								<p class="font-regular">{{ info['NombreAuditor'] }}</p>
+							</div>
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">MONTO CONTRATO</h6>
+								<p class="font-regular">${{ info['montoContrato'] | notext }} MXN</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">MONTO ASIGNADO</h6>
+								<p class="font-regular">{{ info['montoAsignado'] | notext }}</p>
+							</div>
+							<div class="col-md-6 text-center">
+								<h6 class="media-title font-black">MONTO EJERCIDO</h6>
+								<p class="font-regular">${{ info['montoEjercido'] | notext }} MXN</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<h6 class="media-title font-black">Observaciones Generales</h6>
+								<p class="font-regular">{{ info['observacionesGenerales'] | notext }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card p-4">
+				<button id="openModalButton" hidden="true" data-toggle="modal" data-target="#modalChangeEstatusDocument">Press</button>
+				<div class="table-responsive">
+					<table id="datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped dt-responsive w-100">
+						<thead class="font-black-condensed">
+							<tr>
+								<th>Clave</th>
+								<th>Documento</th>
+								<th style="display: none;">Grupo</th>
+								<th class="text-center filtersearch">Estatus</th>
+								<th class="text-center">Documento</th>
+								<th class="text-center">Acciones</th>
+								<th>Observaciones y Recomendaciones</th>
+								<th class="text-center">Cargar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let documento of documentos; let i = index">
+								<td class="text-center">{{ documento.clave }}</td>
+								<td class="w-50 font-bold-condensed" [title]="documento.fundamento">
+									{{ documento.documento }}
+								</td>
+								<td style="display:none;">{{ documento.grupo }}</td>
+								<td class="text-center">
+									<span *ngIf="documento.estatus === 'SI'" class="badge badge-success">{{ documento.estatus }}</span>
+									<span *ngIf="documento.estatus === 'NO'" class="badge badge-danger">{{ documento.estatus }}</span>
+									<div *ngIf="documento.estatus === 'N/A'"><span class="badge badge-primary">{{ documento.estatus }}</span></div>
+									<span *ngIf="documento.estatus === 'DOC. ERRONEO'" class="badge badge-warning">{{ documento.estatus }}</span>
+									<span *ngIf="documento.estatus === 'POR REVISAR'" class="badge badge-dark">{{ documento.estatus }}</span>
+								</td>
+								<td class="text-center">
+									<a *ngIf="documento.downloadLinkDocument" [href]="documento.downloadLinkDocument" target="_self" download="document.pdf" class="badge badge-success">Disponible</a>
+									<span *ngIf="!documento.downloadLinkDocument" class="badge badge-danger">No Disponible</span>
+								</td>
+								<td class="text-center">
+									<div class="list-icons">
+										<div class="btn-group">
+											<button class="btn-transparent btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fas fa-bars"></i>
+											</button>
+
+											<div class="dropdown-menu">
+
+												<a *ngIf="rol != 'Coordinador'" class="dropdown-item" data-toggle="modal" data-target="#modalChangeEstatusDocument" (click)="setDataDocument(i, documento.clave)">
+													<i class="far fa-check-circle"></i>
+													Cambiar Estatus
+												</a>
+
+												<a *ngIf="documento.downloadLinkDocument" [href]="documento.downloadLinkDocument" target="_self" download="document.pdf" class="dropdown-item">
+													<i class="fas fa-file-download"></i>
+													Descargar Documento
+												</a>
+
+												<a *ngIf="!documento.downloadLinkDocument" class="dropdown-item">
+													<i class="fas fa-times"></i>
+													Documento No Disponible
+												</a>
+
+												<a *ngIf="documento.downloadLinkDocument && rol != 'Coordinador'" class="dropdown-item" (click)="modalEliminarDocumento(documento, i)">
+													<i class="fas fa-trash"></i>
+													Eliminar Documento
+												</a>
+
+												<a class="dropdown-item" data-toggle="modal" data-target="#modalObservacionesRecomendaciones" (click)="getObservaciones(documento.clave, i)">
+													<i class="fas fa-edit"></i>
+													Registrar Observación
+												</a>
+
+												<a *ngIf="documento.downloadLinkDocument" class="dropdown-item" (click)="setViewerDoc(documento.downloadLinkDocument)" data-toggle="modal" data-target="#modalVerDocumento">
+													<i class="fas fa-eye"></i>
+													Ver Documento
+												</a>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td class="text-center">{{ documento.comentario | notext }}</td>
+								<td class="text-center">
+									<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalDocumento" (click)="setInfoDocumentoPdf(documento, i)" [disabled]="documento.estatus === 'N/A'">
+										<i class="fas fa-file-upload"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalDocumento" tabindex="-1" role="dialog" aria-labelledby="modalDocumento" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Cargar Documento</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group files">
+					<input #fileDocument type="file" class="form-control" (change)="onFileChanged($event)">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="prepareCargaDocumento()">Actualizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="show" style="position: fixed; bottom: 0; right: 0; width: 20%;">
+    <div style="padding: 5px">
+        <div class="alert alert-dark alert-dismissible text-right fade show" role="alert">
+
+            {{ description }}
+            <i class="fas fa-circle-notch fa-spin ml-2" style="font-size: 17px; color: green;"></i>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalObservacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Registrar Observación</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<textarea [(ngModel)]="nuevoComentario" class="form-control mb-3" rows="4" placeholder="Observación"></textarea>
+				<textarea [(ngModel)]="nuevaRecomendacion" class="form-control" rows="4" placeholder="Recomendación"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="registrarObservacion()">Actualizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalUbicacionMapa" tabindex="-1" role="dialog" aria-labelledby="modalUbicacionMapa" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Ubicación</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+                    <div class="col-md-4">
+                        <input [(ngModel)]="latitud" class="form-control mb-3" placeholder="Latitud" />
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="longitud" class="form-control mb-3" placeholder="Longitud" />
+					</div>
+					<div class="col-md-4">
+						<button class="btn btn-primary w-100" data-dismiss="modal" (click)="registrarUbicacion()">Actualizar</button>
+					</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+						<agm-map [latitude]="centerCords.lat" [longitude]="centerCords.lng">
+							<agm-marker *ngIf="coordsMap" [latitude]="latitud" [longitude]="longitud" [iconUrl]="icons[estatusExpediente].icon"></agm-marker>
+						</agm-map>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalVerDocumento" tabindex="-1" role="dialog" aria-labelledby="modalVerDocumento" aria-hidden="true">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Ver Documento</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+						<ngx-doc-viewer [url]="doc" viewer="google" style="width:100%;height:80vh;"></ngx-doc-viewer>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalObservacionesRecomendaciones" tabindex="-1" role="dialog" aria-labelledby="modalObservacionesRecomendaciones" aria-hidden="true">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Observaciones y Recomendaciones</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+					<div class="col-md-4">
+						<h6>Nueva Observación y Recomendación</h6>
+						<div class="text-right">
+							<button *ngIf="edicionComentarioRecomendacion" class="btn btn-primary" (click)="changeEstatusUpdateComentarios(false)">
+								<i class="fas fa-plus"></i>
+							</button>
+						</div>
+						<select *ngIf="edicionComentarioRecomendacion" class="form-control mt-3 mb-3" [(ngModel)]="estatusComentarioRecomendacion">
+							<option value="1">Atendido</option>
+							<option value="2">No Atendido</option>
+						</select>
+						<textarea [(ngModel)]="nuevoComentario" class="form-control mb-3" rows="4" placeholder="Observación"></textarea>
+						<textarea [(ngModel)]="nuevaRecomendacion" class="form-control" rows="4" placeholder="Recomendación"></textarea>
+						<div class="text-right">
+							<button *ngIf="edicionComentarioRecomendacion" class="btn btn-primary mt-3" (click)="actualizarObservacion()" [disabled]="disabledBtnObservacionesRecomendaciones">Actualizar</button>
+							<button *ngIf="!edicionComentarioRecomendacion" class="btn btn-primary mt-3" (click)="registrarObservacion()" [disabled]="disabledBtnObservacionesRecomendaciones">Agregar</button>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<th>#</th>
+									<th>Observaciones</th>
+									<th>Recomendaciones</th>
+									<th>Estatus</th>
+									<th></th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let item of observaciones; let i = index">
+										<td>{{ i+1 }}</td>
+										<td>{{ item.Observacion | notext }}</td>
+										<td>{{ item.Recomendacion | notext }}</td>
+
+										<td *ngIf="item.Estatus == 1">
+											<span class="badge badge-success">Atendido</span>
+										</td>
+
+										<td *ngIf="item.Estatus == 2">
+											<span class="badge badge-danger">No Atendido</span>
+										</td>
+
+										<td>
+											<button class="btn btn-primary" (click)="setDataUpdateComentarios(item)">
+												<i class="fas fa-pen"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="modalChangeEstatusDocument" tabindex="-1" role="dialog" aria-labelledby="modalChangeEstatusDocument" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Cambiar Estatus</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+						<select [(ngModel)]="estatusChangeDocument" class="form-control mb-3">
+							<option *ngIf="role != 'Coordinador'" value="SI">SI</option>
+							<option value="N/A">N/A</option>
+							<option value="NO">NO</option>
+							<option value="DOC. ERRONEO">DOC. ERRONEO</option>
+						</select>
+
+						<button class="btn btn-primary w-100" data-dismiss="modal" (click)="cambiarEstatusDocumento()">Guardar</button>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalCargarAnexos" tabindex="-1" role="dialog" aria-labelledby="modalObservacionesRecomendaciones" aria-hidden="true">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Anexos</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+					<div class="col-md-4">
+						<h6>Nuevo Anexo</h6>
+						<input #fileAnexo type="file" class="form-control mb-3" (change)="onFileChangedAnexo($event)">
+						<input type="text" [(ngModel)]="tituloAnexo" class="form-control mb-3" placeholder="Titulo">
+						<textarea [(ngModel)]="descripcionAnexo" class="form-control mb-3" rows="4" placeholder="Descripción"></textarea>
+						<button class="btn btn-primary mt-3" (click)="cargarAnexo()">Agregar</button>
+					</div>
+					<div class="col-md-8">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<th>#</th>
+									<th>Nombre</th>
+									<th>Descripción</th>
+									<th></th>
+									<th></th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let item of anexos; let i = index;">
+										<td>{{ i+1 }}</td>
+										<td>{{ item.title }}</td>
+										<td>{{ item.description }}</td>
+										<td>
+											<a class="btn btn-sm btn-primary" [href]="item.url" target="_self" download="item.url">
+												<i class="fas fa-file-download"></i>
+											</a>
+										</td>
+										<td>
+											<button class="btn btn-sm btn-danger" (click)="eliminarAnexo(item.id)">
+												<i class="fas fa-trash"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalObservacionGeneral" tabindex="-1" role="dialog" aria-labelledby="modalObservacion" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Registrar Observación</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<textarea [(ngModel)]="observacionGeneral" class="form-control mb-3" rows="4" placeholder="Observación"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="registrarObservacionGeneral()">Actualizar</button>
+			</div>
+		</div>
+	</div>
+</div>

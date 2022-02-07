@@ -1,0 +1,19 @@
+.text-blue {
+    color: #0d47a1;
+}
+
+.text-green {
+    color: #1b5e20;
+}
+
+.text-red {
+    color: #b71c1c;
+}
+
+.font-size-custom {
+    font-size: 12px;
+}
+
+.ng-chart {
+    width: 150px !important;
+}

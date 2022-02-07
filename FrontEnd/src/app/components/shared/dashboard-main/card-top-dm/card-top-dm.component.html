@@ -1,0 +1,32 @@
+<div class="">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h6 class="font-black-condensed text-uppercase text-center">
+                                Monto Ejercido
+                            </h6>
+                            <h2 class="font-black text-red text-center mt-2">{{ presupuestoComprometido }}</h2>
+                        </div>
+                        <div class="col-md-2">
+                            <rg-gauge-chart
+                                [canvasWidth]="canvasWidth"
+                                [needleValue]="needleValue"
+                                [centralLabel]="centralLabel"
+                                class="ng-chart"
+                                [options]="options"></rg-gauge-chart>
+                        </div>
+                        <div class="col-md-5">
+                            <h6 class="font-black-condensed text-uppercase text-center">
+                                Monto Contratado
+                            </h6>
+                            <h2 class="font-black text-blue text-center mt-2">{{ presupuestoAutorizado }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

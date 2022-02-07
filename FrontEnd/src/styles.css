@@ -1,0 +1,238 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --main-color: #313540 !important;
+    --secondary-color: #72858c !important;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
+
+.font-black-condensed {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+.font-black {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+.font-regular {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.font-bold-condensed {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+/*--- MAPS ---*/
+
+agm-map {
+    height: 750px !important;
+    width: 100% !important;
+}
+
+app-mapa-obras {
+    width: 100%;
+}
+
+/*--- SCREEN CHARGE ---*/
+
+.my-overlay {
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 10000 !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed !important;
+  background-color: var(--main-color);
+  cursor: pointer !important;
+  visibility: visible !important;
+  transition: visibility 0s, opacity 0.4s linear !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: wait !important;
+}
+
+.my-overlay i.fa.fa-spinner.fa-spin, .spinner-big {
+  color: white;
+  font-size: 100px !important;
+}
+
+/*--- SIDEBAR ---*/
+
+#sidebar-wrapper {
+  min-height: 100%;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  /* min-width: 100vw; */
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
+.list-group > .list-group {
+  display: none;
+  margin-bottom: 0;
+}
+
+.list-group-item:focus-within + .list-group {
+  display: block;
+}
+
+.list-group > .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+/*--- DROPDOWN DOTS COLORS ---*/
+
+.icon-rounded {
+  background-color: var(--main-color);
+  border-radius: 25px;
+  padding: 7px;
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+.btn-warning {
+  border-radius: 25px;
+}
+
+.btn-blue-cargado {
+  background-color: #0d47a1;
+  border-color: #0d47a1;
+  border-radius: 25px;
+  color: white;
+}
+
+.btn-blue {
+  background-color: skyblue;
+  border-color: skyblue;
+  border-radius: 25px;
+  color: black;
+}
+
+.btn-gray {
+  background-color: gray;
+  border-color: gray;
+  border-radius: 25px;
+  color: white;
+}
+
+.btn-yellow {
+  background-color: yellow;
+  border-color: yellow;
+  border-radius: 25px;
+  color: black;
+}
+
+.btn-purple {
+  background-color: #ab47bc;
+  border-color: #ab47bc;
+  border-radius: 25px;
+  color: white;
+}
+
+.btn-dropdown-custom {
+  border-radius: 25px;
+}
+
+.btn-success {
+  border-radius: 25px;
+}
+
+/*--- GENERAL ---*/
+
+body {
+  font-family: 'Myriad-Pro-Regular', sans-serif;
+  overflow-x: hidden;
+}
+
+.tag {
+  cursor: pointer;
+  color: #0064bd !important;
+}
+
+.btn-custom {
+  border-radius: 50px;
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+}
+
+/*--- CARDS ---*/
+
+.border-left-blue-cargado {
+  border-left: 4px solid #0d47a1;
+}
+
+.border-left-blue {
+  border-left: 4px solid skyblue;
+}
+
+.border-left-danger {
+  border-left: 4px solid #dc3546;
+}
+
+.border-left-success-review {
+  border-left: 4px solid #1b5e20;
+}
+
+.border-left-success {
+  border-left: 4px solid #27a844;
+}
+
+.border-left-warning {
+  border-left: 4px solid #ff6f00;
+}
+
+.border-left-yellow {
+  border-left: 4px solid yellow;
+}
+
+.border-left-purple {
+  border-left: 4px solid #ab47bc;
+}
+
+.border-left-gray {
+  border-left: 4px solid gray;
+}
+
+.btn-transparent {
+  background-color: transparent;
+  border: 0px solid;
+}

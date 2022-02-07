@@ -1,0 +1,13 @@
+<h2 class="font-black-condensed">{{ title }}</h2>
+<p>% de monto contratado por ejercicio fiscal</p>
+
+<div class="chart">
+    <canvas baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend">
+    </canvas>
+</div>

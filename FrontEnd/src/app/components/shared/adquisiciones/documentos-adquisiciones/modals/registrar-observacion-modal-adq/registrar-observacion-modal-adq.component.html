@@ -1,0 +1,19 @@
+<div class="modal fade" id="modalObservacionGeneral" tabindex="-1" role="dialog" aria-labelledby="modalObservacion" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Registrar Observación</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<textarea [(ngModel)]="observacionGeneral" class="form-control mb-3" rows="4" placeholder="Observación"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="registrarObservacionGeneral()">Actualizar</button>
+			</div>
+		</div>
+	</div>
+</div>
